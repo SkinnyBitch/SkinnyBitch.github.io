@@ -38,3 +38,11 @@ function formFeedback (e) {
     let scrollBlock = document.getElementById("feedback");
     window.scrollTo(0, scrollBlock.offsetTop);
 }
+const imageTags = [...document.querySelectorAll('img[data-big-img-src]')];
+imageTags.forEach(imageTag => {
+        const newImageTag = document.createElement('img');
+        newImageTag.src = imageTag.dataset['bigImgSrc'];
+        newImageTag.alt = imageTag.alt;
+        newImageTag.className = imageTag.className;
+        newImageTag.onload = () => { imageTag.replaceWith(newImageTag) }
+});
