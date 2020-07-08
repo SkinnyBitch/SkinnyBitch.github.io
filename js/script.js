@@ -49,8 +49,10 @@ imageTags.forEach(imageTag => {
     newImageTag.className = imageTag.className;
     newImageTag.onload = () => { imageTag.replaceWith(newImageTag) }
 });
-//при версии для мобильных и планшетов удаляем гифку
-if (window.matchMedia('(max-width: 767px)').matches) {
-    const gifImage = document.querySelector(".price_image");
-    gifImage.onload = () => {gifImage.remove()};
+//при версии для ПК добавляем гифку
+if (window.matchMedia('(min-width: 768px)').matches) {
+    const gifImage = document.createElement('div');
+    gifImage.className = "price_image";
+    const gifImageContainer = document.querySelector(".content-price_image");
+    gifImageContainer.append(gifImage);
 }
