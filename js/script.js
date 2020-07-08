@@ -1,9 +1,6 @@
-// делаем слайдер и проверяем условие, если ширина экрана меньше 767px, удаляем стрелки
+// делаем слайдер 
 let arrow = document.querySelectorAll(".arrow");
 for(let i = 0; i < arrow.length; i++) {
-    if(window.matchMedia('(max-width: 767px)').matches) {
-        arrow[i].remove();
-    }
     arrow[i].addEventListener("click", changeImageNext);
 }
 function changeImageNext (e) {
@@ -55,5 +52,5 @@ imageTags.forEach(imageTag => {
 //при версии для мобильных и планшетов удаляем гифку
 if (window.matchMedia('(max-width: 767px)').matches) {
     const gifImage = document.querySelector(".price_image");
-    gifImage.remove();
+    gifImage.onload = () => {gifImage.remove()};
 }
