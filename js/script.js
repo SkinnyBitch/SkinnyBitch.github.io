@@ -1,5 +1,9 @@
+// делаем слайдер и проверяем условие, если ширина экрана меньше 767px, удаляем стрелки
 let arrow = document.querySelectorAll(".arrow");
 for(let i = 0; i < arrow.length; i++) {
+    if(window.matchMedia('(max-width: 767px)').matches) {
+        arrow[i].remove();
+    }
     arrow[i].addEventListener("click", changeImageNext);
 }
 function changeImageNext (e) {
@@ -29,6 +33,7 @@ function changeImageNext (e) {
         }
     }
 }
+//вешаем событие на кпопки "Прислать маршрут"
 let btn = document.querySelectorAll(".feedback");
 for(let j = 0; j < btn.length; j++) {
     btn[j].addEventListener("click", formFeedback);
@@ -38,11 +43,17 @@ function formFeedback (e) {
     let scrollBlock = document.getElementById("feedback");
     window.scrollTo(0, scrollBlock.offsetTop);
 }
+//при загрузке страницы используем сжатые изображения, потом меняем на нормальные
 const imageTags = [...document.querySelectorAll('img[data-big-img-src]')];
 imageTags.forEach(imageTag => {
-        const newImageTag = document.createElement('img');
-        newImageTag.src = imageTag.dataset['bigImgSrc'];
-        newImageTag.alt = imageTag.alt;
-        newImageTag.className = imageTag.className;
-        newImageTag.onload = () => { imageTag.replaceWith(newImageTag) }
+    const newImageTag = document.createElement('img');
+    newImageTag.src = imageTag.dataset['bigImgSrc'];
+    newImageTag.alt = imageTag.alt;
+    newImageTag.className = imageTag.className;
+    newImageTag.onload = () => { imageTag.replaceWith(newImageTag) }
 });
+//при версии для мобильных и планшетов удаляем гифку
+if (window.matchMedia('(max-width: 767px)').matches) {
+    const gifImage = document.querySelector(".price_image");
+    gifImage.remove();
+}
